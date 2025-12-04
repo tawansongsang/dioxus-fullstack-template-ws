@@ -1,0 +1,11 @@
+{
+    "tailwindCSS.experimental.classRegex": [
+        "class: \"(.*)\""
+    ],
+    "tailwindCSS.includeLanguages": {
+        "rust": "html"
+    },
+    "rust-analyzer.cargo.features": [
+        "server"
+    ],
+}

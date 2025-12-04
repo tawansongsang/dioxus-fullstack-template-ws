@@ -5,5 +5,5 @@ edition = "2024"
 
 [dependencies]
 tokio = { version = "1.48.0", features = ["full"] }
-# db = { workspace = true }
+db = { workspace = true }
 anyhow = { workspace = true }

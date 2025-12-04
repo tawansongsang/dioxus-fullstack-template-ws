@@ -1,6 +1,7 @@
 use std::env;
+use tokio::sync::OnceCell;
 
-use anyhow::Error;
+use anyhow::Result;
 use bb8::Pool;
 use bb8_tiberius::ConnectionManager;
 use dioxus::logger::tracing;
@@ -9,8 +10,9 @@ use tiberius::{AuthMethod, Config};
 // endregion: --- Modules
 
 pub type Db = Pool<ConnectionManager>;
+pub static SQLSERVER_DB: OnceCell<Db> = OnceCell::const_new();
 
-fn get_env(name: &'static str) -> Result<String, Error> {
+fn get_env(name: &'static str) -> Result<String> {
     let env = env::var(name)?;
     Ok(env)
 }
@@ -37,15 +39,24 @@ fn build_config_db() -> Config {
     config_db
 }
 
-pub async fn new_db_pool() -> Result<Db, Error> {
+async fn new_db_pool() -> Result<Db> {
     let config = build_config_db();
     let mgr = bb8_tiberius::ConnectionManager::new(config);
     let pool = bb8::Pool::builder().max_size(5).build(mgr).await?;
     tracing::info!(
-        "{:<12} - new_db_pool - {}",
+        "{} - new_db_pool - {}",
         "STARTUP",
         "Creating Sql Server Connection Pools."
     );
 
     Ok(pool)
+}
+
+pub async fn get_db_pool() -> Result<&'static Db> {
+    SQLSERVER_DB
+        .get_or_try_init(|| async {
+            // new_db_pool() -> Result<Db, Error>
+            new_db_pool().await
+        })
+        .await
 }

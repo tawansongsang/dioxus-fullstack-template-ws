@@ -1,16 +1,37 @@
 use dioxus::prelude::*;
 
-use ui::Navbar;
 use routers::Route;
+use ui::Navbar;
 
-mod views;
 mod routers;
+mod views;
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
 const MAIN_CSS: Asset = asset!("/assets/main.css");
 
+// fn main() {
+//     dioxus::launch(App);
+// }
+
 fn main() {
+    #[cfg(not(feature = "server"))]
     dioxus::launch(App);
+
+    #[cfg(feature = "server")]
+    dioxus::serve(|| async move {
+        // Create a new axum router for our Dioxus app
+
+        use db::{sqlserver::get_db_pool, surrealdb};
+
+        let router = dioxus::server::router(App);
+
+        // .. customize it however you want ..
+        surrealdb::connection_db().await.unwrap();
+        let _sqlserverdb = get_db_pool().await.unwrap();
+
+        // And then return it
+        Ok(router)
+    })
 }
 
 #[component]

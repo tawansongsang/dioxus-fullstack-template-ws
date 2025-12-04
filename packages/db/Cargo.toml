@@ -10,6 +10,7 @@ tiberius = { version = "0.12.3" }
 surrealdb = { version = "2.4.0" }
 dioxus = { workspace = true, features = ["fullstack"] }
 anyhow = { workspace = true }
+tokio = { workspace = true }
 
 [features]
 server = ["dioxus/server"]
