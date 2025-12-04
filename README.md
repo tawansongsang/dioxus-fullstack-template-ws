@@ -73,4 +73,14 @@ and serve:
 dx serve
 ```
 
+in root directory
+```bash
+dx serve --package web
+```
+
+### Bundle Your App
+```bash
+dx bundle --package web --web --release
+```
+
 
