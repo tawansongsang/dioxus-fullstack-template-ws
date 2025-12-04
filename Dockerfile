@@ -11,6 +11,7 @@ ENV TZ="Asia/Bangkok" \
 FROM base AS chef
 RUN dnf group install development-tools -y \
     && dnf in git \
+    openssl-devel \
     cargo rustup \
     rust-src rust-std-static-wasm32-unknown-unknown \
     -y
