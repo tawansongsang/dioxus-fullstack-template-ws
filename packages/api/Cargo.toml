@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 dioxus = { workspace = true, features = ["fullstack"] }
+db = { workspace = true, optional = true }
 
 [features]
-server = ["dioxus/server"]
+server = ["dioxus/server", "dep:db"]

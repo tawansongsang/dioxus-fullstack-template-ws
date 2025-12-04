@@ -4,9 +4,12 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-bb8 = "0.9.1"
-bb8-tiberius = "0.16.0"
-tiberius = "0.12.3"
-surrealdb = "2.4.0"
+bb8 = { version = "0.9.1" }
+bb8-tiberius = { version = "0.16.0" }
+tiberius = { version = "0.12.3" }
+surrealdb = { version = "2.4.0" }
 dioxus = { workspace = true, features = ["fullstack"] }
 anyhow = { workspace = true }
+
+[features]
+server = ["dioxus/server"]
