@@ -1,7 +1,6 @@
 use dioxus::prelude::*;
 
-use crate::views::{Blog, Home};
-use crate::WebNavbar;
+use crate::views::{Blog, Home, LoginWeb, WebNavbar};
 
 #[derive(Debug, Clone, Routable, PartialEq)]
 #[rustfmt::skip]
@@ -11,4 +10,6 @@ pub enum Route {
     Home {},
     #[route("/blog/:id")]
     Blog { id: i32 },
+    #[route("/login")]
+    LoginWeb { }
 }

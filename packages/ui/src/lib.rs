@@ -1,5 +1,7 @@
 //! This crate contains all shared UI for the workspace.
 
+mod components;
+
 mod hero;
 pub use hero::Hero;
 
@@ -8,3 +10,6 @@ pub use navbar::Navbar;
 
 mod echo;
 pub use echo::Echo;
+
+mod login;
+pub use login::Login;

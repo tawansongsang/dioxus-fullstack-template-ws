@@ -1,9 +1,9 @@
 use std::env;
 use tokio::sync::OnceCell;
 
-use anyhow::Result;
 use bb8::Pool;
 use bb8_tiberius::ConnectionManager;
+use dioxus::Result;
 use dioxus::logger::tracing;
 use tiberius::{AuthMethod, Config};
 

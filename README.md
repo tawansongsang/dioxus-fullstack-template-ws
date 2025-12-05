@@ -75,7 +75,7 @@ dx serve
 
 in root directory
 ```bash
-dx serve --package web
+dx serve --package web --web
 ```
 
 ### Bundle Your App
